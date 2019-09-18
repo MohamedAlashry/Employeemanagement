@@ -1,0 +1,43 @@
+﻿@model EmployeeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Name</h1>
+            </div>
+
+            <div class="card-body text-center">
+                @if (Model.Photos != null&&Model.Photos.Count>0)
+                {
+                    foreach (var image in Model.Photos)
+                    {
+                        <img class="card-img-top" src="~/images/@image" asp-append-version="true" />
+
+                    }
+                }
+                else
+                {
+                    <img class="card-img-top" src="~/images/avatar.png" asp-append-version="true" />
+
+                }
+                <h4>Employee ID : @Model.Id</h4>
+                <h4>Email : @Model.Email</h4>
+                <h4>Department : @Model.DeptId</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a asp-controller="Home" asp-action="index" class="btn btn-primary">Back</a>
+                <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/CustomsScript.js"></script>
+}

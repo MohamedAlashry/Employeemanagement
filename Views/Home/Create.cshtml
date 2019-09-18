@@ -1,0 +1,61 @@
+﻿@model EmployeeViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-controller="Home" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" placeholder="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="DeptId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="DeptId" class="form-control" asp-items="Html.GetEnumSelectList<Dept>()">
+                <option value="">Choose Department</option>
+            </select>
+            <span asp-validation-for="DeptId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Files" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10 custom-file">
+            <input asp-for="Files" class="custom-file-input" multiple />
+            <label asp-for="Files" class="custom-file-label">Choose image</label>
+            <span asp-validation-for="Files" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </div>
+</form>
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $(".custom-file-input").on("change", function () {
+                var label = $(".custom-file-label");
+                var uploadedmages = $(this)[0].files;
+                if (uploadedmages.length > 1) {
+                    label.html(uploadedmages.length+" Files selected");
+                }
+                else {
+                    label.html(uploadedmages[0].name);
+                }
+            });
+        });
+    </script>
+}
+

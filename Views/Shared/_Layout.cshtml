@@ -1,0 +1,99 @@
+﻿@inject SignInManager<ApplicationUser> signinMGR
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <environment include="development">
+        <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    </environment>
+    <environment exclude="development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
+              asp-fallback-test-value="absolute"
+              asp-suppress-fallback-integrity="true" />
+
+    </environment>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    @RenderSection("styles", false)
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a class="navbar-brand" asp-controller="home" asp-action="index">
+                <img src="~/images/event.png" width="40" height="40" asp-append-version="true">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="home" asp-action="index">List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="home" asp-action="create">Create</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    @if (signinMGR.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form asp-controller="account" asp-action="Logout" method="post">
+                                <button type="submit" style="width:auto"
+                                        class="nav-link btn btn-link py-0">
+                                    Logout @User.Identity.Name
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="account" asp-action="register">
+                                Register
+                            </a>
+                            <a class="nav-link" asp-controller="account" asp-action="Login">
+                                Login
+                            </a>
+                        </li>
+
+                    }
+                </ul>
+
+            </div>
+        </nav>
+
+
+        <div>
+            @RenderBody()
+        </div>
+        <environment include="development">
+            <script src="~/lib/jquery/jquery.js"></script>
+            <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+            <script src="~/lib/jquery-validate/localization/messages_ar.js"></script>
+            <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+            <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+        </environment>
+        <environment exclude="development">
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"
+                    asp-fallback-href="~/lib/jquery/jquery.min.js"
+                    asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
+                    asp-fallback-test-value="absolute"
+                    asp-suppress-fallback-integrity="true"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"
+                    @*asp-fallback-href="~/lib/jquery/jquery.min.js"
+                    asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
+                    asp-fallback-test-value="absolute"
+                    asp-suppress-fallback-integrity="true" *@></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"
+                    asp-fallback-href="~/lib/bootstrap/js/bootstrap.bundle.min.js"
+                    asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
+                    asp-fallback-test-value="absolute"
+                    asp-suppress-fallback-integrity="true"></script>
+        </environment>
+        @RenderSection("Scripts", false)
+</body>
+</html>

@@ -1,0 +1,8 @@
+﻿@model string
+@{
+    ViewData["Title"] = "CustomErrorPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="alert alert-danger">ErrorPage: 404 Cannot find the page +@Model + you requested</h1>
+<a asp-action="index" asp-controller="Home" class="btn btn-outline-success" style="width:auto">Click here to view all employees</a>

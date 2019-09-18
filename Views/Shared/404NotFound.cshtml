@@ -1,0 +1,14 @@
+﻿@model int
+@{
+    ViewData["Title"] = "Resource Not found";
+}
+
+<div class="alert alert-danger mt-1 mb-1" >
+    <h4>
+        404 Not found Error:
+    </h4>
+    <hr />
+    <h4>Can not find employee with id: @Model</h4>
+
+</div>
+<a asp-action="index" asp-controller="Home" class="btn btn-outline-success" style="width:auto">Click here to view all employees</a>
